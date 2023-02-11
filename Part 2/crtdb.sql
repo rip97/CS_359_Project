@@ -6,7 +6,7 @@ name TEXT, gender TEXT);
 
 CREATE TABLE Administrator (empId INTEGER PRIMARY KEY, name TEXT,gender TEXT);
 
-CREATE TABLE Salesman (empId INTEGER PRIMARY, name TEXT, gender TEXT);
+CREATE TABLE Salesman (empId INTEGER PRIMARY KEY, name TEXT, gender TEXT);
 
 CREATE TABLE AirtimePackage (packageId INTEGER PRIMARY KEY, class TEXT, gender TEXT,startDate date, 
 lastDate date, frequency INTEGER, videoCode INTEGER); 
