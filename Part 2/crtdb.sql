@@ -1,7 +1,21 @@
 --Creates by Al
 
 --Creates by Justyn
+CREATE TABLE TechnicalSupport (empId Integer PRIMARY KEY, 
+name TEXT, gender TEXT); 
 
+CREATE TABLE Administrator (empId INTEGER PRIMARY KEY, name TEXT,gender TEXT);
+
+CREATE TABLE Salesman (empId INTEGER PRIMARY, name TEXT, gender TEXT);
+
+CREATE TABLE AirtimePackage (packageId INTEGER PRIMARY KEY, class TEXT, gender TEXT,startDate date, 
+lastDate date, frequency INTEGER, videoCode INTEGER); 
+
+CREATE TABLE AdmWorkHours (empId INTEGER, day date, hours NUMERIC, PRIMARY KEY (empId, day),
+FOREIGN KEY (empId) REFERENCES Administrator (empId) 
+	ON DELETE CASCADE 
+	ON UPDATE NO ACTION
+); 
 --Creates by Joshua
 create table Broadcasts(
     videoCode integer, 
