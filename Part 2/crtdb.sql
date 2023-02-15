@@ -1,4 +1,42 @@
 --Creates by Al
+CREATE TABLE Video (
+    videoCode INTEGER
+    , videoLength INTEGER
+    , PRIMARY KEY (videoCode)
+);
+
+CREATE TABLE Model (
+    modelNo TEXT
+    , width NUMERIC
+    , height NUMERIC
+    , weight NUMERIC
+    , depth NUMERIC
+    , screenSize NUMERIC
+    , PRIMARY KEY (modelNo)
+);
+
+CREATE TABLE Site (
+    siteCode INTEGER
+    , type TEXT
+    , address TEXT
+    , phone TEXT
+    , PRIMARY KEY (siteCode)
+);
+
+CREATE TABLE DigitalDisplay (
+    serialNo TEXT
+    , schedulerSystem TEXT
+    , modelNo TEXT
+    , FORIEGN KEY (modelNo) REFERENCES Model(modelNo)
+);
+
+CREATE TABLE Client (
+    clientId INTEGER
+    , name TEXT
+    , phone TEXT
+    , address TEXT
+    , PRIMARY KEY (clientId)
+);
 
 --Creates by Justyn
 CREATE TABLE TechnicalSupport (empId Integer PRIMARY KEY, 
