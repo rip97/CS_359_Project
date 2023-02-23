@@ -21,7 +21,7 @@ GO
 INSERT INTO Site
 VALUES (1, 'Restaurant', '123 Spring Road Albuquerque New Mexico 87101', '5058561111')
 	, (2, 'Bar', '1023 East Main Albuquerque New Mexico 87101', '5054501010')
-	, (3, 'Bar', '123 Spring Road Albuquerque New Mexico 87101', '5058561111')
+	, (3, 'Bar', '10023 Rocky Road Albuquerque New Mexico 87101', '5057801001')
 	, (4, 'Restaurant', '111 Main Albuquerque New Mexico 87101', '5053512000')
 	, (5, 'Bar', '1010 Cypress Road Albuquerque New Mexico 87101', '5056549000')
 GO
