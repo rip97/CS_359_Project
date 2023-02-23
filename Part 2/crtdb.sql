@@ -39,21 +39,21 @@ CREATE TABLE Client (
 );
 
 --Creates by Justyn
-CREATE TABLE TechnicalSupport (empId Integer PRIMARY KEY, 
-name TEXT, gender TEXT); 
+CREATE TABLE TechnicalSupport(empId INTEGER, name VARCHAR(40), gender char(1), PRIMARY KEY (empId)); 
 
-CREATE TABLE Administrator (empId INTEGER PRIMARY KEY, name TEXT,gender TEXT);
+CREATE TABLE Administrator(empId INTEGER, name VARCHAR(40), gender char(1), PRIMARY KEY (empId)); 
 
-CREATE TABLE Salesman (empId INTEGER PRIMARY KEY, name TEXT, gender TEXT);
+CREATE TABLE Salesman(empId INTEGER, name VARCHAR(40), gender char(1), PRIMARY KEY (empId)); 
 
-CREATE TABLE AirtimePackage (packageId INTEGER PRIMARY KEY, class TEXT, gender TEXT,startDate date, 
-lastDate date, frequency INTEGER, videoCode INTEGER); 
+CREATE TABLE AirtimePackage(packageId INTEGER, class varchar(16) check (class in ('economy','whole day','golden hours')), startDate date, lastDate date, 
+	frequency INTEGER, videoCode INTEGER, PRIMARY KEY (packageId)); 
+	
+CREATE TABLE AdmWorkHours (
+empId INTEGER, 
+day date, hours NUMERIC (4,2), 
+PRIMARY KEY (empId,day), 
+FOREIGN KEY (empId) REFERENCES Administrator );
 
-CREATE TABLE AdmWorkHours (empId INTEGER, day date, hours NUMERIC, PRIMARY KEY (empId, day),
-FOREIGN KEY (empId) REFERENCES Administrator (empId) 
-	ON DELETE CASCADE 
-	ON UPDATE NO ACTION
-); 
 --Creates by Joshua
 create table Broadcasts(
     videoCode integer, 
