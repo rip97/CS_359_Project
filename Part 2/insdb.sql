@@ -44,5 +44,39 @@ VALUES (1, 'John Doe', '5057895050', '10 East Broadway Albuquerque New Mexico 87
 GO
 
 --Justyn's inserts
+INSERT INTO TechnicalSupport VALUES 
+(1001,'Bruce Evans', 'M'),
+(1002,'Anahi Booker','F'),
+(1003,'Seth Evans','M'),
+(1004,'Caylee Hart','F'),
+(1005,'Javier Baxter','M') 
+GO 
+
+INSERT INTO Administrator VALUES
+(2010,'Miracle Cummings','F'),
+(2011,'Abdiel Castillo','F'),
+(2012,'Camila Anthony','F'),
+(2013,'Howard Richard','M'),
+(2014,'Dominik Potts','M')
+
+GO 
+
+INSERT INTO Salesman VALUES 
+(3100,'Nikolai Valencia','M'),
+(3105,'Jack Bonilla','M'),
+(3110,'Mireya Golden','F'),
+(3115,'Tiara Copeland','F'),
+(3120,'Jaylynn Calderon','F')
+
+GO 
+
+INSERT INTO AirtimePackage 
+VALUES 
+	(2102,'golden hours',2023-03-01,2023-04-01,4,100012)
+	,(2104,'whole day',2023-03-01,2023-05-06,2,100022) 
+	,(2106,'economy',2023-01-01,2023-12-31,10,100032)
+	,(2108,'golden hours',2023-04-01,2023-04-31,2,100042)
+	,(2110,'whole day',2023-03-01,2023-03-02,1,100052)
+	
 
 --Joshua's inserts
