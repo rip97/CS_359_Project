@@ -1,41 +1,44 @@
 --Creates by Al
 CREATE TABLE Video (
-    videoCode INTEGER
-    , videoLength INTEGER
-    , PRIMARY KEY (videoCode)
+    videoCode INTEGER,
+    videoLength INTEGER,
+    PRIMARY KEY (videoCode)
 );
 
 CREATE TABLE Model (
-    modelNo TEXT
-    , width NUMERIC
-    , height NUMERIC
-    , weight NUMERIC
-    , depth NUMERIC
-    , screenSize NUMERIC
-    , PRIMARY KEY (modelNo)
+    modelNo CHAR(10),
+    width NUMERIC(6, 2),
+    height NUMERIC(6, 2),
+    weight NUMERIC(6, 2),
+    depth NUMERIC(6, 2),
+    screenSize NUMERIC(6, 2),
+    PRIMARY KEY (modelNo)
 );
 
 CREATE TABLE Site (
-    siteCode INTEGER
-    , type TEXT
-    , address TEXT
-    , phone TEXT
-    , PRIMARY KEY (siteCode)
+    siteCode INTEGER,
+    type VARCHAR(16)
+		CHECK (type IN ('Restaurant', 'Bar')),
+    address VARCHAR(100),
+    phone VARCHAR(16),
+    PRIMARY KEY (siteCode)
 );
 
 CREATE TABLE DigitalDisplay (
-    serialNo TEXT
-    , schedulerSystem TEXT
-    , modelNo TEXT
-    , FORIEGN KEY (modelNo) REFERENCES Model(modelNo)
+    serialNo CHAR(10),
+    schedulerSystem CHAR(10)
+		CHECK (schedulerSystem IN ('Random', 'Smart', 'Virtue')),
+    modelNo CHAR(10),
+    PRIMARY KEY (serialNo),
+    FOREIGN KEY (modelNo) REFERENCES Model (modelNo)
 );
 
 CREATE TABLE Client (
-    clientId INTEGER
-    , name TEXT
-    , phone TEXT
-    , address TEXT
-    , PRIMARY KEY (clientId)
+    clientId INTEGER,
+    name VARCHAR(40),
+    phone VARCHAR(16),
+    address VARCHAR(100),
+    PRIMARY KEY (clientId)
 );
 
 --Creates by Justyn
