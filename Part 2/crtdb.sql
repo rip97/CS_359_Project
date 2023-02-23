@@ -42,60 +42,87 @@ CREATE TABLE Client (
 );
 
 --Creates by Justyn
-CREATE TABLE TechnicalSupport(empId INTEGER, name VARCHAR(40), gender char(1), PRIMARY KEY (empId)); 
+CREATE TABLE TechnicalSupport (
+    empId INTEGER,
+    name VARCHAR(40),
+    gender CHAR(1),
+	PRIMARY KEY (empId)
+);
 
-CREATE TABLE Administrator(empId INTEGER, name VARCHAR(40), gender char(1), PRIMARY KEY (empId)); 
+CREATE TABLE Administrator (
+    empId INTEGER,
+    name VARCHAR(40),
+    gender char(1),
+	PRIMARY KEY (empId)
 
-CREATE TABLE Salesman(empId INTEGER, name VARCHAR(40), gender char(1), PRIMARY KEY (empId)); 
+);
 
-CREATE TABLE AirtimePackage(packageId INTEGER, class varchar(16) check (class in ('economy','whole day','golden hours')), startDate date, lastDate date, 
-	frequency INTEGER, videoCode INTEGER, PRIMARY KEY (packageId)); 
-	
+CREATE TABLE Salesman (
+    empId INTEGER,
+    name VARCHAR(40),
+    gender CHAR(1),
+	PRIMARY KEY (empId)
+);
+
+CREATE TABLE AirtimePackage (
+    packageId INTEGER,
+    class VARCHAR(16)
+		CHECK (class IN ('economy', 'whole day', 'golden hours')),
+    startDate DATE,
+    lastDate DATE,
+    frequency INTEGER,
+    videoCode INTEGER,
+	PRIMARY KEY (packageId)
+);
+
 CREATE TABLE AdmWorkHours (
-empId INTEGER, 
-day date, hours NUMERIC (4,2), 
-PRIMARY KEY (empId,day), 
-FOREIGN KEY (empId) REFERENCES Administrator );
+    empId INTEGER,
+    day DATE,
+    hours NUMERIC(4, 2),
+    PRIMARY KEY (empId, day),
+    FOREIGN KEY (empId) REFERENCES Administrator (empId)
+);
 
 --Creates by Joshua
-create table Broadcasts(
-    videoCode integer, 
-    siteCode integer,
+CREATE TABLE Broadcasts (
+    videoCode INTEGER,
+    siteCode INTEGER,
     PRIMARY KEY (videoCode, siteCode),
-    Foreign key (videoCode) references Video(videoCode),
-    Foreign key (siteCode) references Site (siteCode)
+    FOREIGN KEY (videoCode) REFERENCES Video (videoCode),
+    FOREIGN KEY (siteCode) REFERENCES Site (siteCode)
 );
 
-create table Administers(
-    empId integer, 
-    siteCode integer,
+CREATE TABLE Administers (
+    empId INTEGER,
+    siteCode INTEGER,
     PRIMARY KEY (empId, siteCode),
-    Foreign key (empId) references Administrator (empId),
-    Foreign key (siteCode) references Site (siteCode)
+    FOREIGN KEY (empId) REFERENCES Administrator (empId),
+    FOREIGN KEY (siteCode) REFERENCES Site (siteCode)
 );
 
-create table Specializes(
-    empId integer, 
-    modelNo text,
+CREATE TABLE Specializes (
+    empId INTEGER,
+    modelNo CHAR(10),
     PRIMARY KEY (empID, modelNo),
-    Foreign key (empId) references TechnicalSupport (empId),
-    Foreign key (modelNo) references Model (modelNo)
+    FOREIGN KEY (empId) REFERENCES TechnicalSupport (empId),
+    FOREIGN KEY (modelNo) REFERENCES Model (modelNo)
 );
 
-create table Purchases(
-    clientId integer, 
-    empId integer, 
-    packageId integer,
-    commissionRate numeric,
+CREATE TABLE Purchases (
+    clientId INTEGER,
+    empId INTEGER,
+    packageId INTEGER,
+    commissionRate NUMERIC(4, 2),
     PRIMARY KEY(clientId, empID, packageId),
-    Foreign key (empId) references Salesman (empId),
-    Foreign key (packageId) references AirtimePackage (packageId)
+    FOREIGN KEY (clientId) REFERENCES Client (clientId),
+    FOREIGN KEY (empId) REFERENCES Salesman (empId),
+    FOREIGN KEY (packageId) REFERENCES AirtimePackage (packageId)
 );
 
-create table Locates(
-    serialNo text, 
-    siteCode integer,
+CREATE TABLE Locates (
+    serialNo CHAR(10),
+    siteCode INTEGER,
     PRIMARY KEY (serialNo, siteCode),
-    Foreign key (serialNo) references DigitalDisplay (serialNo) ,
-    Foreign key (siteCode) references Site (siteCode) 
+    FOREIGN KEY (serialNo) REFERENCES DigitalDisplay (serialNo),
+    FOREIGN KEY (siteCode) REFERENCES Site (siteCode)
 );
