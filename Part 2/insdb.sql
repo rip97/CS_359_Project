@@ -80,3 +80,21 @@ VALUES
 	
 
 --Joshua's inserts
+--Joshua's inserts
+INSERT INTO Broadcasts(VideoCode, SiteCode) 
+SELECT A.VideoCode, B.SiteCode FROM Video A INNER JOIN Site B WHERE A.VideoCode = B.SiteCode;
+
+INSERT INTO Administers(empId,siteCode) 
+SELECT EmpID, ROW_NUMBER() OVER(Order by empid) FROM Administrator;
+
+INSERT INTO Specializes(empId, modelNo) 
+SELECT empId, modelNo FROM (Select empID, ROW_NUMBER() OVER(ORDER BY empID)[row] FROM TechnicalSupport) A INNER JOIN (SELECT modelNo, ROW_NUMBER() OVER(ORDER BY modelNo)[row] FROM Model) B ON A.row = B.row;
+
+INSERT INTO Purchases(clientID, empId, packageId, commissionRate) 
+SELECT A.clientID, B.empID, c.packageID, 10.5 
+FROM (SELECT ClientID FROM Client) A 
+INNER JOIN (SELECT empId, ROW_NUMBER() OVER(order By empid)[row] FROM Salesman) B ON A.clientID = b.row 
+INNER JOIN (SELECT packageID, ROW_NUMBER() over(order By packageID)[row] FROM AirtimePackage) C ON A.clientID = c.row;
+
+INSERT INTO Locates (siteCode, serialNo) 
+SELECT A.SiteCode, B.SerialNo FROM (SELECT SiteCode FROM Site) A INNER JOIN (SELECT serialNo, ROW_NUMBER() OVER (ORDER BY serialNo)[row] FROM DigitalDisplay) B ON A.siteCode = B.Row;
