@@ -72,15 +72,28 @@ GO
 
 INSERT INTO AirtimePackage 
 VALUES 
-	(2102,'golden hours',2023-03-01,2023-04-01,4,100012)
-	,(2104,'whole day',2023-03-01,2023-05-06,2,100022) 
-	,(2106,'economy',2023-01-01,2023-12-31,10,100032)
-	,(2108,'golden hours',2023-04-01,2023-04-31,2,100042)
-	,(2110,'whole day',2023-03-01,2023-03-02,1,100052)
+	(2102,'golden hours','2023-03-01','2023-04-01',4,1)
+	,(2104,'whole day','2023-03-01','2023-05-06',2,2) 
+	,(2106,'economy','2023-01-01','2023-12-31',10,3)
+	,(2108,'golden hours','2023-04-01','2023-04-31',2,4)
+	,(2110,'whole day','2023-03-01','2023-03-02',1,5)
 	
+GO   
+
+INSERT INTO AdmWorkHours 
+VALUES 
+	(2010, '2023-03-04',8.0)
+	,(2011,'2023-03-04',9.0) 
+	,(2012,'2023-03-04',7.5) 
+	,(2013,'2023-03-04',8.5)
+	,(2014,'2023-03-04',12.5)
+
+
+GO
 
 --Joshua's inserts
 --Joshua's inserts
+
 INSERT INTO Broadcasts(VideoCode, SiteCode) 
 SELECT A.VideoCode, B.SiteCode FROM Video A INNER JOIN Site B WHERE A.VideoCode = B.SiteCode;
 
