@@ -55,13 +55,34 @@ def getQuery():
                     f"ORDER BY hrs.hours"
                     )
         case 6: 
-            return f"SELECT 'Case 6'"
+            return (f"SELECT ts.name "
+                    f"FROM TechnicalSupport ts "
+                    f"INNER JOIN Specializes s "
+                    f"ON s.empId = ts.empId "
+                    f"INNER JOIN Model m "
+                    f"ON m.modelNo = s.modelNo "
+                    f"WHERE m.modelNo LIKE '%{where}%'"
+                    )
+
         case 7: 
-            return f"SELECT 'Case 7'"
+            return (f"SELECT s.name, p.avgRate as AverageCommissionRate "
+                    f"FROM Salesman s "
+                    f"INNER JOIN (SELECT p.empId, AVG(p.commissionRate) as avgRate "
+                    f"FROM Purchases p "
+                    f"GROUP BY p.empId "
+                    f") p "
+                    f"ON p.empId = s.empId "
+                    f"ORDER BY p.avgRate DESC"
+                    )
         case 8: 
-            return f"SELECT 'Case 8'"
+            return (f"SELECT 'Administrator' as Role, COUNT(*) as cnt FROM Administrator "
+                    f"UNION "
+                    f"SELECT 'Salesman', COUNT(*) FROM Salesman "
+                    f"UNION "
+                    f"SELECT 'Technicians', COUNT(*) FROM TechnicalSupport "
+                    )
         case _: # Default Case
-            return f"'Invalid Parameter'"            
+            return f"'Invalid Parameter'"
 
     return ""
 
