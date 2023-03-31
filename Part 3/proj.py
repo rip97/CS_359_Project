@@ -42,11 +42,19 @@ def getQuery():
         case 1:
             return f"SELECT * FROM Site where address like '%{where}%'"
         case 2: 
-            return f"SELECT 'Case 2'"
+            return (f"SELECT DD.serialNo, DD.modelNo, TS.Name FROM DigitalDisplay as DD " 
+                    f"INNER JOIN Specializes as S ON S.modelNo = DD.modelNo "
+                    f"INNER JOIN TechnicalSupport as TS ON TS.empId = S.empId "
+                    f"WHERE dd.schedulerSystem LIKE '%{where}%'"
+                    )
         case 3: 
-            return f"SELECT 'Case 3'"
+            return (f"SELECT DISTINCT name FROM Salesman "
+                   f"ORDER BY name ASC"
+                   )
         case 4: 
-            return f"SELECT 'Case 4'"
+            return (f"SELECT name, address FROM Client "
+                    f"WHERE phone Like '%{where}'"
+                    )
         case 5:            
             return (f"SELECT adm.empId, adm.name, hrs.hours " 
                     f"FROM Administrator adm "
