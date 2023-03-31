@@ -5,8 +5,9 @@ import sqlite3
 
 #main function
 def main():
-    query = getQuery()
-    queryResult = runQuery(query)
+    query = getQuery() #query string
+    where = getWhereValueFromParams(getQuestionNumFromParams()) #query parameters, if any
+    queryResult = runQuery(query, where)
 
 # Helper to quickly identify what questions expect a where clause
 def doesQuestionContainWhereClause(num):
@@ -30,22 +31,24 @@ def getWhereValueFromParams(num):
         if len(sys.argv) > 2:
             # The first argument is the name of the script
             # The second argument (index 1) is the input parameter
-            return sys.argv[2]
+            if(num == 1) :
+                return (f"%{sys.argv[2]}%",) #the only query that is using a like statement is query number 1. Our like statement requires param to be surrounded by % 
+            else:
+                return (sys.argv[2],)
     return ""
 
 #get the query to be ran depending on argument(s) passed from command line.
 def getQuery():
     num = getQuestionNumFromParams() #param arg[1]
-    where = getWhereValueFromParams(num) #param arg[2], if expected
 
     match num:
         case 1:
-            return f"SELECT * FROM Site where address like '%{where}%'"
+            return f"SELECT * FROM Site where address like ?"
         case 2: 
             return (f"SELECT DD.serialNo, DD.modelNo, TS.Name FROM DigitalDisplay as DD " 
                     f"INNER JOIN Specializes as S ON S.modelNo = DD.modelNo "
                     f"INNER JOIN TechnicalSupport as TS ON TS.empId = S.empId "
-                    f"WHERE dd.schedulerSystem LIKE '%{where}%'"
+                    f"WHERE dd.schedulerSystem = ?"
                     )
         case 3: 
             return (f"SELECT "
@@ -63,7 +66,7 @@ def getQuery():
                    )
         case 4: 
             return (f"SELECT name, address FROM Client "
-                    f"WHERE phone Like '%{where}'"
+                    f"WHERE phone  = ? "
                     )
         case 5:            
             return (f"SELECT adm.empId, adm.name, hrs.hours " 
@@ -79,7 +82,7 @@ def getQuery():
                     f"ON s.empId = ts.empId "
                     f"INNER JOIN Model m "
                     f"ON m.modelNo = s.modelNo "
-                    f"WHERE m.modelNo LIKE '%{where}%'"
+                    f"WHERE m.modelNo = ? "
                     )
 
         case 7: 
@@ -113,7 +116,7 @@ def getQuery():
 #(3, 'Bar', '10023 Rocky Road Albuquerque New Mexico 87101', '5057801001'), 
 #(4, 'Restaurant', '111 Main Albuquerque New Mexico 87101', '5053512000'), 
 #(5, 'Bar', '1010 Cypress Road Albuquerque New Mexico 87101', '5056549000')]) 
-def runQuery(query):
+def runQuery(query, args):
     result = []
     column_names = []
     try:
@@ -127,7 +130,7 @@ def runQuery(query):
         else:
             cursor = sqliteConnection.cursor()
             ## Write a query and execute it with cursor
-            cursor.execute(query)
+            cursor.execute(query,args)
             column_names = [i[0] for i in cursor.description]        
 
             ## Fetch and output result
