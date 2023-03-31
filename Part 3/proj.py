@@ -48,8 +48,18 @@ def getQuery():
                     f"WHERE dd.schedulerSystem LIKE '%{where}%'"
                     )
         case 3: 
-            return (f"SELECT DISTINCT name FROM Salesman "
-                   f"ORDER BY name ASC"
+            return (f"SELECT "
+                    f"SUBSTR(name, 0, INSTR(name, ' ')) as NAME, "
+                    f"COUNT(*) as CNT, "
+                    f"CASE "
+                    f"WHEN COUNT(*) > 1 "
+                    f"  THEN "
+                    f"    (SELECT group_concat(( '(' || empId || ',' || name || ',' || gender || ')'), ', ')  FROM Salesman "
+                    f"      GROUP BY SUBSTR(name, 0, INSTR(name, ' ')) "
+                    f"HAVING COUNT(*) > 1) "
+                    f"END '' "
+                    f"FROM Salesman " 
+                    f"GROUP by SUBSTR(name, 0, INSTR(name, ' '))"       
                    )
         case 4: 
             return (f"SELECT name, address FROM Client "
