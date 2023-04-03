@@ -141,36 +141,6 @@ def runQuery(query, args):
 
             # Close the cursor
             cursor.close()
-    
-
-
-       ##Iterate over elements to determine the max width
-       #FINAL LENGTH IS STILL TOO SMALL, SET DEFAULT TO 125 chars
-       #WILL NEED TO REMOVE FROM FINAL REPO
-       # maxLength = 0
-       # elemSum = 0
-       # for elem in result:
-       #     tempSum = 0
-       #     for j in elem:
-       #         if type(j) == int:
-       #             tempSum += j
-       #             elemSum += j
-       #             print("Value of J: ", j)
-       #             print("Int Value: ", tempSum)
-       #         else:
-       #             tempSum += len(j)
-       #             print("Non-int length: ", len(j))
-       #             print("new Sum Value: ", tempSum)              
-       #     print("tempSum: ", tempSum)
-       #     print("ElemSum: ", elemSum)
-       #     if tempSum > elemSum:
-       #         elemSum = tempSum
-       # if elemSum > maxLength:
-       #     maxLength = elemSum
-
-       # print("Max Width: ", maxLength)
-       # pprint(column_names, width=maxLength)
-       # pprint(result, width=maxLength)
       
     # Handle errors and return error line
     except sqlite3.Error as error:
@@ -185,13 +155,8 @@ def runQuery(query, args):
             sqliteConnection.close()
             # print('SQLite Connection closed')
     
-    #returns column names and results in a single line. 
-    #TODO: Look into formatting rather than just running print(column_names) above
-    #look into iterating over result list and pulling max length of element and use
-    #that as the width in the pprint width parameter
     return (column_names,result) 
 
-    #return ""
 
 # runs the main function
 main()
