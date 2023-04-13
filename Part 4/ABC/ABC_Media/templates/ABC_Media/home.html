@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <Title>ABC Media</Title>
+</head>
+<body style="background-color: hsl(180,100%,25%);">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">ABC Media</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li><a href="/login">Login</a></li>
+              <li><a href="#">Page 2</a></li>
+              <li><a href="#">Page 3</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container" style="background-color: hsl(240,100%,20%); padding-top:45px; text-color:white;">
+    {% block content %}
+    {% endblock %}
+    </div>
+    <div class="navbar navbar-inverse navbar-fixed-bottom">
+        <span class="navbar-text">
+            <p style="text-align: center;">© 2023 Copyright: ABC Media Company </p>
+        </span>
+    </div>
+</body>
+</html>
