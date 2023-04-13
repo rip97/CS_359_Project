@@ -1,10 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from .forms import DatabaseInputForm
 
 # Create your views here.
 
 
+def homepage(request):
+    return render(request, "ABC_Media/home.html")
+
+
 def login(request):
-    template = loader.get_template("ABC_Media/login.html")
-    return render(request, "ABC_Media/login.html")
+    form = DatabaseInputForm
+    return render(request, "ABC_Media/login.html", context={'form': form})
+
