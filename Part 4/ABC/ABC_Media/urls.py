@@ -8,4 +8,7 @@ app_name = 'ABC_Media'
 urlpatterns = [
     path("", views.homepage, name="homepage"),
     path("login/", views.login, name="login"),
+    path("main/", views.main, name="main"),
+    path("logout/", views.logout, name="logout"),
+    path("search_digi_disp/", views.search_digi_disp,name="search")
 ]
