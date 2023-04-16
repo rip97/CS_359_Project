@@ -1,0 +1,36 @@
+{% extends 'ABC_Media/home.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-2">
+      <h3> Digital Display Asset Management</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 offset-md-2">
+       <h4><a href="#">View All Digital Display</a></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 offset-md-2">
+        <!-- add java script function for a look up as user enters in a id -->
+        <form method="POST">
+             {% csrf_token %}
+            {{ form.digital_display }}
+            <button type="submit" class="btn btn-primary">Search
+            </button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 col-md-4 offset-md-2">
+        <h4><a href="#">Add New Digital Display</a></h4>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-4 col-md-4 offset-md-2">
+        <h4><a href="#">Remove/Update Digital Display</a></h4>
+    </div>
+</div>
+{% endblock %}
