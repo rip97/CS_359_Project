@@ -1,3 +1,4 @@
+from sched import scheduler
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .forms import DatabaseInputForm
@@ -5,6 +6,7 @@ from .forms import SearchForm
 from django.db import connection
 from django.contrib import messages
 from django.http import HttpResponse
+from .models import Digitaldisplay
 
 # Create your views here.
 
@@ -63,6 +65,20 @@ def main(request):
 def search_digi_disp(request, d_id):
     return HttpResponse("I got the ID")
 
+def view_all_displays(request):
+    displays = Digitaldisplay.objects.all()
 
+    context = {
+        'displays': displays
+        }
 
+    return render(request, 'ABC_Media/displays.html', context)
+
+#def update_display(request, conn, disp_id):
+def update_display(request):
+    return render(request, 'ABC_Media/update.html')
+
+#def delete_display(request, conn, disp_id):
+def delete_display(request):
+    return render(request, 'ABC_Media/delete.html')
 

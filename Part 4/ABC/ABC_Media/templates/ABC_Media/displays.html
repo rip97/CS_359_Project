@@ -1,0 +1,66 @@
+﻿{% extends 'ABC_Media/home.html' %}
+
+{% block content %}
+
+<a href="{% url 'ABC_Media:main' %}" style="color:white; font-weight: bold">Home</a>
+
+<center>
+    <h3>Digital Displays</h3>
+</center>
+
+<br />
+
+<head>
+    <title>Display All Digital Displays</title>
+    <style>
+        table, th, td {
+            border: 1px solid white;
+            padding: 10px;
+        }
+    </style>
+</head>
+         
+<body>
+    <table>
+        <tr>
+            <th>
+                Serial Number
+            </th>
+            <th>
+                Scheduler System
+            </th>
+            <th>
+                Model Number
+            </th>
+            <th>
+                Update
+            </th>
+            <th>
+                Delete
+            </th>
+        </tr>
+
+        {% for display in displays %}
+        <tr>
+            <td>
+                {{ display.serialno }}
+            </td>
+            <td>
+                {{ display.schedulersystem }}
+            </td>
+            <td>
+                {{ display.modelno.modelno }}
+            </td>
+            <td>
+                <a href="{% url 'ABC_Media:update' %}"> Update</a>
+            </td>
+            <td>
+                <a href="{% url 'ABC_Media:delete' %}"> Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+
+{% endblock %}
