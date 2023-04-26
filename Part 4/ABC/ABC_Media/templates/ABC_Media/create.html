@@ -1,0 +1,40 @@
+{% extends 'ABC_Media/home.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        <h3>Create new digital display</h3>
+        <span class="text-danger">{{validation_status}}</span>
+        <form method="post" action="">
+            {% csrf_token %}
+            <label for="serialNumber" class="form-label">Serial #</label>
+            <input type="text" id="serialNumber" name="serialNumber" class="form-control" maxlength="10"/>
+    
+            <label for="schedulerSystem" class="form-label">Scheduler System</label>
+            <select class="form-control" id="schedulerSystem" name="schedulerSystem">
+                <option value="Random">Random</option>
+                <option value="Smart">Smart</option>
+                <option value="Virtue">Virtue</option>
+            </select>
+        
+            <label for="modelNo" class="form-label">Model Number</label>
+            <input type="text" id="modelNo" name="modelNo" class="form-control" maxlength="10"/>
+
+            <!-- {{form.serialNumber}}
+            {{form.schedulerSystem}}
+            {{form.modelNo}} -->
+
+            <br/>
+            <div style="min-height: 75px;">
+                <button type="submit" class="btn btn-light float-end">Create</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-4"></div>
+</div>
+<div class="container">
+   
+</div>
+
+{% endblock %}
