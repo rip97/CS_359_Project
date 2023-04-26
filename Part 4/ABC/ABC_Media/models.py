@@ -61,9 +61,9 @@ class Client(models.Model):
         db_table = 'Client'    
 
 class Digitaldisplay(models.Model):
-    serialno = models.CharField(max_length=10, db_column='serialNo', primary_key=True, blank=True, null=False)  # Field name made lowercase.
-    schedulersystem = models.CharField(max_length=10, db_column='schedulerSystem', blank=True, null=True)  # Field name made lowercase.
-    modelno = models.ForeignKey('Model', models.DO_NOTHING, db_column='modelNo', blank=True, null=True)  # Field name made lowercase.
+    serialno = models.CharField(max_length=10, db_column='serialNo', primary_key=True, blank=False, null=False)  # Field name made lowercase.
+    schedulersystem = models.CharField(max_length=10, db_column='schedulerSystem', blank=False, null=False)  # Field name made lowercase.
+    modelno = models.ForeignKey('Model', models.DO_NOTHING, db_column='modelNo', blank=False, null=False)  # Field name made lowercase. 
 
     class Meta:
         managed = False
@@ -79,12 +79,16 @@ class Locates(models.Model):
 
 
 class Model(models.Model):
-    modelno = models.CharField(max_length=10, db_column='modelNo', primary_key=True, blank=True, null=False)  # Field name made lowercase.
-    width = models.TextField(blank=True, null=True)  # This field type is a guess.
-    height = models.TextField(blank=True, null=True)  # This field type is a guess.
-    weight = models.TextField(blank=True, null=True)  # This field type is a guess.
-    depth = models.TextField(blank=True, null=True)  # This field type is a guess.
-    screensize = models.TextField(db_column='screenSize', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    modelno = models.CharField(max_length=10, db_column='modelNo', primary_key=True, blank=False, null=False)  # Field name made lowercase.
+    width = models.TextField(db_column='width', blank=False, null=False)  # This field type is a guess.
+    height = models.TextField(db_column='height', blank=False, null=False)  # This field type is a guess.
+    weight = models.TextField(db_column='weight', blank=False, null=False)  # This field type is a guess.
+    depth = models.TextField(db_column='depth', blank=False, null=False)  # This field type is a guess.
+    screensize = models.TextField(db_column='screenSize', blank=False, null=False)  # Field name made lowercase. This field type is a guess.
+
+    #When __str__ is called object attribute will be returned not the object
+    def __str__(self):
+        return self.modelno
 
     class Meta:
         managed = False

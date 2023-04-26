@@ -1,0 +1,91 @@
+﻿{% extends 'ABC_Media/home.html' %}
+
+{% block content %}
+
+<a href="{% url 'ABC_Media:main' %}" style="color:white; font-weight: bold">Home</a>
+<br />
+<br />
+
+<center>
+    <h2> Add Digital Display</h2>
+</center>
+
+<head>
+    <style>
+        table, th, td {
+            border: 1px solid white;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<div class="form-group">
+    <form action="" method=POST>
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <input type="submit" value="Submit" class="btn btn-success" />
+        <a href="{% url 'ABC_Media:view_all_displays' %}" class="btn btn-secondary btn-sml"> Cancel </a>
+
+    </form>
+</div>
+
+<br />
+<br />
+
+<h3> List of Available Models </h3>
+
+<table>
+    <tr>
+        <th>
+            Model Number
+        </th>
+        <th>
+            Width
+        </th>
+        <th>
+            Height
+        </th>
+        <th>
+            Weight
+        </th>
+        <th>
+            Depth
+        </th>
+        <th>
+            Screen Size
+        </th>
+    </tr>
+
+    {% for model in models %}
+    <tr>
+        <td>
+            {{ model.modelno }}
+        </td>
+        <td>
+            {{ model.width }}
+        </td>
+        <td>
+            {{ model.height }}
+        </td>
+        <td>
+            {{ model.weight }}
+        </td>
+        <td>
+            {{ model.depth }}
+        </td>
+        <td>
+            {{ model.screensize }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br />
+
+List of Available Models can also viewed here:
+<a href="{% url 'ABC_Media:viewModels' %}" style="color:lawngreen; font-weight: bold">Models</a>
+
+{% endblock %}

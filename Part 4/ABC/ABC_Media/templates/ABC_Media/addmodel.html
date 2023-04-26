@@ -1,0 +1,29 @@
+﻿{% extends 'ABC_Media/home.html' %}
+
+{% block content %}
+
+<a href="{% url 'ABC_Media:main' %}" style="color:white; font-weight: bold">Home</a>
+<br />
+<br />
+
+<center>
+    <h2> Add Model</h2>
+</center>
+
+
+<div class="form-group">
+    <form action="" method=POST>
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <input type="submit" value="Submit" class="btn btn-success" />
+        <a href="{% url 'ABC_Media:view_all_displays' %}" class="btn btn-secondary btn-sml"> Cancel </a>
+
+    </form>
+</div>
+
+<br />
+<br />
+
+{% endblock %}

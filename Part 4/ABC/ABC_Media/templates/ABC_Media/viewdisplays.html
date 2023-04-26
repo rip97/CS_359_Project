@@ -1,0 +1,109 @@
+﻿{% extends 'ABC_Media/home.html' %}
+
+{% block content %}
+
+<a href="{% url 'ABC_Media:main' %}" style="color:white; font-weight: bold">Home</a>
+
+<center>
+    <h3>Digital Displays</h3>
+</center>
+
+<br />
+
+<a href="{% url 'ABC_Media:add_model' %}" class="btn btn-secondary btn-sml"> Add Display </a>
+<br />
+<br />
+
+<head>
+    <style>
+        table, th, td {
+            border: 1px solid white;
+            padding: 10px;
+            text-align: center;
+            background-color-black;
+        }
+    </style>
+</head>
+
+<table>
+    <tr>
+        <th>
+            Serial Number
+        </th>
+        <th>
+            Scheduler System
+        </th>
+        <th>
+            Model Number
+        </th>
+        <th colspan="2">
+            Action
+        </th>
+    </tr>
+
+    {% for display in displays %}
+    <tr>
+        <td>
+            {{ display.serialno }}
+        </td>
+        <td>
+            {{ display.schedulersystem }}
+        </td>
+        <!--<td>
+            {{ display.modelno.modelno }}
+        </td>-->
+        <td>
+            <a href="{% url 'ABC_Media:viewModelInfo' display.modelno.modelno %}">{{ display.modelno.modelno }}</a>
+        </td>        
+        <td>
+            <a href="{% url 'ABC_Media:update_display' display.serialno %}" class="btn btn-success btn-sml"> Update </a>
+        </td>
+        <td>
+            <!--<a href="{% url 'ABC_Media:delete_display' display.serialno %}"> Delete</a>-->
+            <a href="{% url 'ABC_Media:delete_display' display.serialno %}" class="btn btn-danger btn-sml"> Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br />
+
+<!--Page Number Logic-->
+{% if displays.has_previous %}
+<a href="?page=1"> &laquo; First</a>
+<a href="?page={{ displays.previous_page_number }}"> Previous</a>
+{% endif %}
+
+Page {{ displays.number }} of {{ displays.paginator.num_pages}}
+
+{% if displays.has_next %}
+<a href="?page={{ displays.next_page_number }}"> Next</a>
+<a href="?page={{ displays.paginator.num_pages }}"> Last &raquo</a>
+{% endif %}
+
+<br />
+<br />
+
+
+
+<!-- BOOTSTRAP PAGINATION-->
+<!--<nav aria-label="Page navigation example">
+    <ul class="pagination">
+
+        {% if displays.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1"> &laquo; First</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ displays.previous_page_number }}"> Previous</a></li>
+        {% endif %}
+
+        <li class="page-item disabled"><a class="page-link" href="#"> Page {{ displays.number }} of {{ displays.paginator.num_pages}}</a></li>
+
+        {% if displays.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ displays.next_page_number }}"> Next</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ displays.paginator.num_pages }}"> Last &raquo</a></li>
+        {% endif %}
+
+    </ul>
+</nav>-->
+
+
+{% endblock %}
