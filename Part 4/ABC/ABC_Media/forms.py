@@ -83,12 +83,12 @@ class ModelCreateForm(ModelForm):
             }
 
         widgets = {
-            'modelno': forms.TextInput(attrs={'class': 'form-control'}), 
-            'width': forms.TextInput(attrs={'class': 'form-control'}), 
-            'height': forms.TextInput(attrs={'class': 'form-control'}), 
-            'weight': forms.TextInput(attrs={'class': 'form-control'}), 
-            'depth': forms.TextInput(attrs={'class': 'form-control'}), 
-            'screensize': forms.TextInput(attrs={'class': 'form-control'}), 
+            'modelno': forms.TextInput(attrs={'class': 'col-auto', 'placeholder': 'Model Number', 'style': 'width: 20%'}), 
+            'width': forms.TextInput(attrs={'class': 'col-auto', 'placeholder': 'Width', 'style': 'width: 20%'}), 
+            'height': forms.TextInput(attrs={'class': 'col-auto', 'placeholder': 'Height', 'style': 'width: 20%'}), 
+            'weight': forms.TextInput(attrs={'class': 'col-auto', 'placeholder': 'Weight', 'style': 'width: 20%'}), 
+            'depth': forms.TextInput(attrs={'class': 'col-auto', 'placeholder': 'Depth', 'style': 'width: 20%'}), 
+            'screensize': forms.TextInput(attrs={'class': 'col-auto', 'placeholder': 'Screen Size', 'style': 'width: 20%'}), 
             }
 
 #Model Form View
