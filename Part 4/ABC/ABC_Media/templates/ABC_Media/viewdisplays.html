@@ -2,69 +2,43 @@
 
 {% block content %}
 
-<a href="{% url 'ABC_Media:main' %}" style="color:white; font-weight: bold">Home</a>
+<h2 class="page-title">Digital Displays</h2>
 
-<center>
-    <h3>Digital Displays</h3>
-</center>
 
 <br />
 
-<a href="{% url 'ABC_Media:add_model' %}" class="btn btn-secondary btn-sml"> Add Display </a>
+<a href="{% url 'ABC_Media:main' %}" class="btn btn-secondary">Home</a>
+<a href="{% url 'ABC_Media:add_model' %}" class="btn btn-green green-secondary"> Add Model </a>
+<a href="{% url 'ABC_Media:add_display' %}" class="btn  btn-green green-secondary"> Add Display </a>
 <br />
 <br />
 
-<head>
-    <style>
-        table, th, td {
-            border: 1px solid white;
-            padding: 10px;
-            text-align: center;
-            background-color-black;
-        }
-    </style>
-</head>
-
-<table>
-    <tr>
-        <th>
-            Serial Number
-        </th>
-        <th>
-            Scheduler System
-        </th>
-        <th>
-            Model Number
-        </th>
-        <th colspan="2">
-            Action
-        </th>
-    </tr>
-
-    {% for display in displays %}
-    <tr>
-        <td>
-            {{ display.serialno }}
-        </td>
-        <td>
-            {{ display.schedulersystem }}
-        </td>
-        <!--<td>
-            {{ display.modelno.modelno }}
-        </td>-->
-        <td>
-            <a href="{% url 'ABC_Media:viewModelInfo' display.modelno.modelno %}">{{ display.modelno.modelno }}</a>
-        </td>
-        <td>
-            <a href="{% url 'ABC_Media:update_display' display.serialno %}" class="btn btn-success btn-sml"> Update </a>
-        </td>
-        <td>
-            <!--<a href="{% url 'ABC_Media:delete_display' display.serialno %}"> Delete</a>-->
-            <a href="{% url 'ABC_Media:delete_display' display.serialno %}" class="btn btn-danger btn-sml"> Delete</a>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+<div class="card" >
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>Serial Number</th>
+                <th>Scheduler System</th>
+                <th>Model Number</th>
+                <th>Action</th>
+            </tr>
+        
+            {% for display in displays %}
+            <tr>
+                <td>{{ display.serialno }}</td>
+                <td>{{ display.schedulersystem }}</td>
+                <td>
+                    <a href="{% url 'ABC_Media:viewModelInfo' display.modelno.modelno %}">{{ display.modelno.modelno }}</a>
+                </td>        
+                <td>
+                    <a href="{% url 'ABC_Media:update_display' display.serialno %}" class="btn btn-primary"> Update </a>
+                    <a href="{% url 'ABC_Media:delete_display' display.serialno %}" class="btn btn-danger"> Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
 
 <br />
 

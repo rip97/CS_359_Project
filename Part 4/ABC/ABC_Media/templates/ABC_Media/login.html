@@ -1,15 +1,36 @@
 {% extends 'ABC_Media/home.html' %}
 {% block content %}
 
-<h3> Connect to ABC Media Database </h3>
-<form method="POST"  class="form-group">
+
+
+<h3 class="page-title text-center"> Connect to ABC Media Database </h3>
+
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <form method="POST"  class="form-group">
+            {% csrf_token %}
+            
+           <label class="form-label">Data Base Name</label>
+           <div class="input-group mb-3" style="color:black">
+       
+               {{ form.data_base_name }}
+               <button type="submit" class="btn btn-success">Connect</button>
+           </div>
+       </form>
+    </div>
+    <div class="col-4"></div>
+</div>
+
+<!-- <form method="POST"  class="form-group">
      {% csrf_token %}
+     
     <label class="form-label">Data Base Name</label>
     <div class="input-group mb-3" style="color:black">
 
         {{ form.data_base_name }}
         <button type="submit" class="btn btn-success">Connect</button>
     </div>
-</form>
+</form> -->
 
 {% endblock %}
