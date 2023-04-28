@@ -17,5 +17,5 @@ urlpatterns = [
     path("add_display/", views.add_display, name='add_display'),
     path("view_all_models/", views.view_all_models, name='viewModels'),
     path("view_model_info/<model_number>", views.view_model_info, name='viewModelInfo'),
-    path("add_model/", views.add_model, name='add_model'),
+    path("add_model/", views.add_model, name='add_model'),    
 ]

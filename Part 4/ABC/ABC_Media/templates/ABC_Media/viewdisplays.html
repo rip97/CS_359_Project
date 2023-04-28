@@ -54,7 +54,7 @@
         </td>-->
         <td>
             <a href="{% url 'ABC_Media:viewModelInfo' display.modelno.modelno %}">{{ display.modelno.modelno }}</a>
-        </td>        
+        </td>
         <td>
             <a href="{% url 'ABC_Media:update_display' display.serialno %}" class="btn btn-success btn-sml"> Update </a>
         </td>
@@ -67,6 +67,10 @@
 </table>
 
 <br />
+
+List of Available Models can also viewed here:
+<a href="{% url 'ABC_Media:viewModels' %}" style="color:lawngreen; font-weight: bold">Models</a>
+ <br />
 
 <!--Page Number Logic-->
 {% if displays.has_previous %}
@@ -104,6 +108,4 @@ Page {{ displays.number }} of {{ displays.paginator.num_pages}}
 
     </ul>
 </nav>-->
-
-
 {% endblock %}

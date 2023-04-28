@@ -121,14 +121,19 @@ def update_display(request, display_id):
     return render(request, 'ABC_Media/updatedisplay.html', context)
 
 def delete_display(request, display_id):    
-    digital_display = Digitaldisplay.objects.get(pk=display_id)
-    modelNo = digital_display.modelno
-    models = Model.objects.get(pk=modelNo)
-    #digital_display.delete()
-    #Add Logic to Check for other Displays Sharing the Same Model No. If none, delete from Model Table    
-    #print(models)
-    #return
-    return redirect('/view_all_displays')
+    digital_display = Digitaldisplay.objects.get(pk=display_id) #Get Display with display_id
+    modelNo = digital_display.modelno #Pull ModelNo from the Display Object
+    models = Model.objects.get(pk=modelNo) #Pull associated model using Display Model No
+    digital_display.delete() #Delete Display
+
+    #Add Logic to Check for other Displays Sharing the Same Model No. If none, delete from Model Table
+    modelCount = Digitaldisplay.objects.filter(modelno=modelNo).count()
+    if (modelCount > 1): 
+        return redirect('/view_all_displays')
+    else:
+        models.delete()
+        return redirect('/view_all_displays')
+
 
 def view_all_models(request):
     models = Model.objects.all()
