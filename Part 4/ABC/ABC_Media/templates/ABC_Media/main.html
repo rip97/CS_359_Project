@@ -1,7 +1,34 @@
 {% extends 'ABC_Media/home.html' %}
 
 {% block content %}
+
+<h2 class="page-title"> Digital Display Asset Management</h2>
+
 <div class="row">
+    <div class="col-md-4">
+        <div class="card" style="height: 20rem;">
+            <div class="card-body">
+              <h5 class="card-title">Manage digital displays</h5>
+              <p class="card-text">View all displays, create new displays, and manage existing displays</p>
+              <a href="{% url 'ABC_Media:view_all_displays' %}" class="btn btn-primary">Manage</a>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4"></div>
+    <!-- <div class="col-md-4">
+        <div class="card" style="height: 25rem;">
+            <div class="card-body">
+              <h5 class="card-title">Manage other data</h5>
+              <p class="card-text">Coming soon!</p>
+              <a href="{% url 'ABC_Media:view_all_displays' %}" class="btn btn-primary">Manage</a>
+            </div>
+          </div>
+    </div> -->
+</div>
+
+
+<!-- <div class="row">
     <div class="col-md-6 offset-md-2">
       <h3> Digital Display Asset Management</h3>
     </div>
@@ -13,7 +40,6 @@
 </div>
 <div class="row">
     <div class="col-md-4 offset-md-2">
-        <!-- add java script function for a look up as user enters in a id -->
         <form method="POST">
              {% csrf_token %}
             {{ form.digital_display }}
@@ -27,7 +53,7 @@
         <h4><a href="{% url 'ABC_Media:add_display' %}">Add New Digital Display</a></h4>
     </div>
 
-</div>
+</div> -->
 <!--<div class="row">
     <div class="col-md-4 col-md-4 offset-md-2">
         <h4><a href="#">Remove/Update Digital Display</a></h4>

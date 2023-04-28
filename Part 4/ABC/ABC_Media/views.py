@@ -71,13 +71,15 @@ def search_digi_disp(request, d_id):
 def view_all_displays(request):
     #With Order by warning is suppressed, depends on number of objects in the database.
     #p = Paginator(Digitaldisplay.objects.all().order_by("serialno"), 20) 
-    
-    p = Paginator(Digitaldisplay.objects.all(), 20)
+    if 'username' in request.session:
+        current_user = request.session['username']
+    p = Paginator(Digitaldisplay.objects.all(), 7)
     page = request.GET.get('page')
     displays = p.get_page(page)
 
     context = {
-        'displays': displays
+        'displays': displays,
+        'current_user': current_user
         }
 
     return render(request, 'ABC_Media/viewdisplays.html', context)
@@ -100,7 +102,8 @@ def add_display(request):
     context = {
         'form': form,
         'submitted': submitted,
-        'models': models
+        'models': models,
+        'current_user' : request.session['username']
         }
 
     return render(request, 'ABC_Media/adddisplay.html', context)
@@ -115,7 +118,8 @@ def update_display(request, display_id):
 
     context = {
         'digital_display': digital_display,
-        'form': form
+        'form': form,
+        'current_user' : request.session['username']
         }
 
     return render(request, 'ABC_Media/updatedisplay.html', context)
@@ -134,7 +138,8 @@ def view_all_models(request):
     models = Model.objects.all()
 
     context = {
-        'models': models
+        'models': models,
+        'current_user' : request.session['username']
         }
 
     return render(request, 'ABC_Media/viewmodels.html', context)
@@ -145,7 +150,8 @@ def view_model_info(request, model_number):
 
     context = {
         'models': models,
-        'form': form
+        'form': form,
+        'current_user' : request.session['username']
         }
 
     return render(request, 'ABC_Media/modelinfo.html', context)
@@ -167,7 +173,8 @@ def add_model(request):
     context = {
         'form': form,
         'submitted': submitted,
-        'models': models
+        'models': models,
+        'current_user' : request.session['username']
         }
 
     return render(request, 'ABC_Media/addmodel.html', context)

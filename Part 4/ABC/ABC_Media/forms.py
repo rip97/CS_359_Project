@@ -11,12 +11,12 @@ from .models import Model, Digitaldisplay
 
 class DatabaseInputForm(forms.Form):
 
-    data_base_name = forms.CharField(label="Data Base Name", max_length=100)
+    data_base_name = forms.CharField(label="Data Base Name", max_length=100, widget=forms.TextInput(attrs={"class": "form-control"}))
 
 
 class SearchForm(forms.Form):
 
-    digital_display = forms.CharField(label="Digital Display", max_length=20)
+    digital_display = forms.CharField(label="Digital Display", max_length=20, widget=forms.TextInput(attrs={"class": "form-control"}))
 
 
 #Create Digtal Display
@@ -38,8 +38,9 @@ class DigitalDisplayForm(ModelForm):
             }
 
         widgets = {
-            'serialno': forms.TextInput(attrs={'class': 'col-auto', 'placeholder': 'Serial Number', 'style': 'width: 20%'}),
-            'schedulersystem': forms.Select(choices=DISPLAY_SYSTEMS),
+            'serialno': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Serial Number'}),
+            'schedulersystem': forms.Select(choices=DISPLAY_SYSTEMS, attrs={"class": " form-select "}),
+            'modelno': forms.Select( attrs={"class": " form-select "}),
             }
 
 
@@ -62,8 +63,8 @@ class DigitalDisplayFormUpdate(ModelForm):
             }
 
         widgets = {
-            'serialno': forms.TextInput(attrs={'disabled': 'true'}),
-            'schedulersystem': forms.Select(choices=DISPLAY_SYSTEMS),
+            'serialno': forms.TextInput(attrs={'disabled': 'true', "class": " form-control"}),
+            'schedulersystem': forms.Select(choices=DISPLAY_SYSTEMS, attrs={"class": " form-select "}),
             }
 
 #Model Form Create
@@ -83,12 +84,12 @@ class ModelCreateForm(ModelForm):
             }
 
         widgets = {
-            'modelno': forms.TextInput(attrs={'class': 'col-auto', 'placeholder': 'Model Number', 'style': 'width: 20%'}), 
-            'width': forms.TextInput(attrs={'class': 'col-auto', 'placeholder': 'Width', 'style': 'width: 20%'}), 
-            'height': forms.TextInput(attrs={'class': 'col-auto', 'placeholder': 'Height', 'style': 'width: 20%'}), 
-            'weight': forms.TextInput(attrs={'class': 'col-auto', 'placeholder': 'Weight', 'style': 'width: 20%'}), 
-            'depth': forms.TextInput(attrs={'class': 'col-auto', 'placeholder': 'Depth', 'style': 'width: 20%'}), 
-            'screensize': forms.TextInput(attrs={'class': 'col-auto', 'placeholder': 'Screen Size', 'style': 'width: 20%'}), 
+            'modelno': forms.TextInput(attrs={'class': ' form-control', 'placeholder': 'Model Number', 'style': 'width: 20%'}), 
+            'width': forms.TextInput(attrs={'class': ' form-control', 'placeholder': 'Width', 'style': 'width: 20%'}), 
+            'height': forms.TextInput(attrs={'class': ' form-control', 'placeholder': 'Height', 'style': 'width: 20%'}), 
+            'weight': forms.TextInput(attrs={'class': ' form-control', 'placeholder': 'Weight', 'style': 'width: 20%'}), 
+            'depth': forms.TextInput(attrs={'class': ' form-control', 'placeholder': 'Depth', 'style': 'width: 20%'}), 
+            'screensize': forms.TextInput(attrs={'class': ' form-control', 'placeholder': 'Screen Size', 'style': 'width: 20%'}), 
             }
 
 #Model Form View
@@ -108,10 +109,10 @@ class ModelInfoForm(ModelForm):
             }
 
         widgets = {
-            'modelno': forms.TextInput(attrs={'disabled': 'true'}), 
-            'width': forms.TextInput(attrs={'disabled': 'true'}), 
-            'height': forms.TextInput(attrs={'disabled': 'true'}), 
-            'weight': forms.TextInput(attrs={'disabled': 'true'}),
-            'depth': forms.TextInput(attrs={'disabled': 'true'}),
-            'screensize': forms.TextInput(attrs={'disabled': 'true'}),
+            'modelno': forms.TextInput(attrs={'disabled': 'true', "class":"form-control"}), 
+            'width': forms.TextInput(attrs={'disabled': 'true', "class":"form-control"}), 
+            'height': forms.TextInput(attrs={'disabled': 'true', "class":"form-control"}), 
+            'weight': forms.TextInput(attrs={'disabled': 'true', "class":"form-control"}),
+            'depth': forms.TextInput(attrs={'disabled': 'true', "class":"form-control"}),
+            'screensize': forms.TextInput(attrs={'disabled': 'true', "class":"form-control"}),
             }
