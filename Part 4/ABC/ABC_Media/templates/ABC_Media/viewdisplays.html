@@ -4,12 +4,26 @@
 
 <h2 class="page-title">Digital Displays</h2>
 
-
 <br />
 
 <a href="{% url 'ABC_Media:main' %}" class="btn btn-secondary">Home</a>
 <a href="{% url 'ABC_Media:add_model' %}" class="btn btn-green green-secondary"> Add Model </a>
 <a href="{% url 'ABC_Media:add_display' %}" class="btn  btn-green green-secondary"> Add Display </a>
+
+<br />
+<div class="row">
+    <br />
+    <div class="col-md-4">
+        <form class="form-group" method="POST" action="{% url 'ABC_Media:searched' %}">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <input class="form-control" type="text" name="searched" placeholder="Search Display">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <br />
 <br />
 
@@ -33,6 +47,7 @@
                 <td>
                     <a href="{% url 'ABC_Media:update_display' display.serialno %}" class="btn btn-primary"> Update </a>
                     <a href="{% url 'ABC_Media:delete_display' display.serialno %}" class="btn btn-danger"> Delete</a>
+
                 </td>
             </tr>
             {% endfor %}
