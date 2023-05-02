@@ -52,21 +52,34 @@ def logout(request):
 def main(request):
     if 'username' in request.session:
         current_user = request.session['username']
-        form = SearchForm(request.POST)
-        param = {'current_user': current_user, 'form': form }
-        if request.method == "POST":
-            if form.is_valid():
-                d_id = form.cleaned_data['digital_display']
-                return redirect(search_digi_disp(request, d_id))
-        else:
-            return render(request, "ABC_Media/main.html", param)
+        # form = SearchForm(request.POST)
+        param = {'current_user': current_user}
+        #if request.method == "POST":
+            #if form.is_valid():
+               # d_id = form.cleaned_data['digital_display']
+               # return redirect(search_digi_disp(request, d_id))
+
+        return render(request, "ABC_Media/main.html", param)
     else:
         return redirect("ABC_Media:login")
 
 
 # need to work this method out - Rippie
-def search_digi_disp(request, d_id):
-    return HttpResponse("I got the ID")
+def search_digi_disp(request):
+    if 'username' in request.session:
+        current_user = request.session['username']
+        searched = request.POST['searched']
+        digital_display = Digitaldisplay.objects.get(pk=searched)
+        param = {'current_user': current_user, 'searched': searched,
+                 'digital_display': digital_display}
+        return render(request, "ABC_Media/searched.html", param)
+
+    else:
+        return redirect("ABC_Media:login")
+
+
+
+
 
 def view_all_displays(request):
     #With Order by warning is suppressed, depends on number of objects in the database.

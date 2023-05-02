@@ -1,0 +1,32 @@
+{% extends 'ABC_Media/home.html' %}
+
+{% block content %}
+{%if digital_display %}
+<h1> Results for Digital Display {{ searched }} </h1>
+
+<div class="card" >
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>Serial Number</th>
+                <th>Scheduler System</th>
+                <th>Model Number</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>{{ digital_display.serialno }}</td>
+                <td>{{ digital_display.schedulersystem }}</td>
+                <td>
+                    <a href="{% url 'ABC_Media:viewModelInfo' digital_display.modelno.modelno %}">{{ digital_display.modelno.modelno }}</a>
+                </td>
+                <td>
+                    <a href="{% url 'ABC_Media:update_display' digital_display.serialno %}" class="btn btn-primary"> Update </a>
+                    <a href="{% url 'ABC_Media:delete_display' digital_display.serialno %}" class="btn btn-danger"> Delete</a>
+                    <a href="{% url 'ABC_Media:view_all_displays' %}" class="btn btn-success">Exit</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

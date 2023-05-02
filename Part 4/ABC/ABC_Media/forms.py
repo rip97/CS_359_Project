@@ -16,7 +16,7 @@ class DatabaseInputForm(forms.Form):
 
 class SearchForm(forms.Form):
 
-    digital_display = forms.CharField(label="Digital Display", max_length=20, widget=forms.TextInput(attrs={"class": "form-control"}))
+    digital_display = forms.CharField(label="Digital Display", max_length=20, widget=forms.TextInput(attrs={"placeholder": "search"}))
 
 
 #Create Digtal Display
