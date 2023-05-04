@@ -9,6 +9,7 @@ from django.http import HttpResponse, JsonResponse
 from .models import Digitaldisplay, Model
 from .forms import DigitalDisplayForm, DigitalDisplayFormUpdate, ModelInfoForm, ModelCreateForm
 from django.contrib import messages
+import re
 
 #Pagination
 from django.core.paginator import Paginator
@@ -65,18 +66,46 @@ def main(request):
 
 
 # need to work this method out - Rippie
+# def search_digi_disp(request):
+#     if 'username' in request.session:
+#         current_user = request.session['username']
+#         searched = request.POST['searched']
+#         digital_display = Digitaldisplay.objects.get(pk=searched)
+#         digital_display_search_results = []
+#         for display in Digitaldisplay.objects.all():
+#             if searched in display.serialno:
+#                 digital_display_search_results.append(digital_display)
+#         param = {'current_user': current_user, 'searched': searched,
+#                  'digital_display': digital_display}
+#         return render(request, "ABC_Media/searched.html", param)
+
+#     else:
+#         return redirect("ABC_Media:login")
+
 def search_digi_disp(request):
     if 'username' in request.session:
         current_user = request.session['username']
         searched = request.POST['searched']
-        digital_display = Digitaldisplay.objects.get(pk=searched)
-        param = {'current_user': current_user, 'searched': searched,
-                 'digital_display': digital_display}
-        return render(request, "ABC_Media/searched.html", param)
+        # digital_display = Digitaldisplay.objects.get(pk=searched)
+        digital_display_search_results = []
+        for display in Digitaldisplay.objects.all():
+            if searched in display.serialno:
+                digital_display_search_results.append(display)
+        # param = {'current_user': current_user, 'searched': searched,
+        #          'digital_displays': digital_display_search_results}
+        p = Paginator(digital_display_search_results, 7)
+        page = request.GET.get('page')
+        displays = p.get_page(page)
+
+        context = {
+            'displays': displays,
+            'current_user': current_user,
+            'searched' : searched
+            }
+        return render(request, "ABC_Media/viewdisplays.html", context)
 
     else:
         return redirect("ABC_Media:login")
-
 
 
 
@@ -92,7 +121,8 @@ def view_all_displays(request):
 
     context = {
         'displays': displays,
-        'current_user': current_user
+        'current_user': current_user,
+        'searched':''
         }
 
     return render(request, 'ABC_Media/viewdisplays.html', context)
@@ -106,7 +136,7 @@ def add_display(request):
         form = DigitalDisplayForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/view_all_displays')
+            return redirect('/view_all_displays',request)
     else: 
         form = DigitalDisplayForm
         if 'submitted' in request.GET:
@@ -127,7 +157,7 @@ def update_display(request, display_id):
 
     if form.is_valid():
         form.save()
-        return redirect('/view_all_displays')
+        return redirect('/view_all_displays',request)
 
     context = {
         'digital_display': digital_display,
@@ -146,10 +176,10 @@ def delete_display(request, display_id):
     #Add Logic to Check for other Displays Sharing the Same Model No. If none, delete from Model Table
     modelCount = Digitaldisplay.objects.filter(modelno=modelNo).count()
     if (modelCount > 1): 
-        return redirect('/view_all_displays')
+        return redirect('/view_all_displays',request)
     else:
         models.delete()
-        return redirect('/view_all_displays')
+        return redirect('/view_all_displays',request)
 
 
 def view_all_models(request):

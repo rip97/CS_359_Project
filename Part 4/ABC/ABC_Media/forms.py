@@ -63,8 +63,9 @@ class DigitalDisplayFormUpdate(ModelForm):
             }
 
         widgets = {
-            'serialno': forms.TextInput(attrs={'disabled': 'true', "class": " form-control"}),
+            'serialno': forms.TextInput(attrs={'readonly': 'true', "class": " form-control"}),
             'schedulersystem': forms.Select(choices=DISPLAY_SYSTEMS, attrs={"class": " form-select "}),
+            'modelno': forms.Select( attrs={"class": " form-select "}),
             }
 
 #Model Form Create
@@ -109,10 +110,10 @@ class ModelInfoForm(ModelForm):
             }
 
         widgets = {
-            'modelno': forms.TextInput(attrs={'disabled': 'true', "class":"form-control"}), 
-            'width': forms.TextInput(attrs={'disabled': 'true', "class":"form-control"}), 
-            'height': forms.TextInput(attrs={'disabled': 'true', "class":"form-control"}), 
-            'weight': forms.TextInput(attrs={'disabled': 'true', "class":"form-control"}),
-            'depth': forms.TextInput(attrs={'disabled': 'true', "class":"form-control"}),
-            'screensize': forms.TextInput(attrs={'disabled': 'true', "class":"form-control"}),
+            'modelno': forms.TextInput(attrs={'readonly': 'true', "class":"form-control"}), 
+            'width': forms.TextInput(attrs={'readonly': 'true', "class":"form-control"}), 
+            'height': forms.TextInput(attrs={'readonly': 'true', "class":"form-control"}), 
+            'weight': forms.TextInput(attrs={'readonly': 'true', "class":"form-control"}),
+            'depth': forms.TextInput(attrs={'readonly': 'true', "class":"form-control"}),
+            'screensize': forms.TextInput(attrs={'readonly': 'true', "class":"form-control"}),
             }

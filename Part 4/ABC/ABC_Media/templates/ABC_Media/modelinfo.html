@@ -2,19 +2,12 @@
 
 {% block content %}
 
-<a href="{% url 'ABC_Media:main' %}" style="color:white; font-weight: bold">Home</a>
-<br />
-<br />
+<h2 class="page-title"> Model Information</h2>
 
-<a href="{% url 'ABC_Media:view_all_displays' %}" style="color:white">Back</a>
-<br />
-<br />
-
-<center>
-    <h3>Model Information</h3>
-</center>
-
-
+<div>
+    <a href="{% url 'ABC_Media:main' %}" class="btn btn-secondary">Home</a>
+    <a href="{% url 'ABC_Media:view_all_displays' %}" class="btn btn-secondary">Back</a>
+</div>
 <br />
 
 <div class="form-group">
@@ -25,6 +18,4 @@
 
     </form>
 </div>
-<br />
-
 {% endblock %}

@@ -4,28 +4,24 @@
 
 <h2 class="page-title">Digital Displays</h2>
 
-<br />
 
-<a href="{% url 'ABC_Media:main' %}" class="btn btn-secondary">Home</a>
-<a href="{% url 'ABC_Media:add_model' %}" class="btn btn-green green-secondary"> Add Model </a>
-<a href="{% url 'ABC_Media:add_display' %}" class="btn  btn-green green-secondary"> Add Display </a>
-
-<br />
 <div class="row">
-    <br />
-    <div class="col-md-4">
+    <div class="col">
+        <a href="{% url 'ABC_Media:main' %}" class="btn btn-secondary">Home</a>
+        <a href="{% url 'ABC_Media:add_model' %}" class="btn btn-green green-secondary"> Add Model </a>
+        <a href="{% url 'ABC_Media:add_display' %}" class="btn  btn-green green-secondary"> Add Display </a>
+    </div>
+    <div class="col">
         <form class="form-group" method="POST" action="{% url 'ABC_Media:searched' %}">
             {% csrf_token %}
             <div class="input-group mb-3">
-                <input class="form-control" type="text" name="searched" placeholder="Search Display">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <input class="form-control" type="text" name="searched" placeholder="Search Display" value="{{ searched }}">
+                <button class="btn btn-outline-success" type="submit">Search by serial no.</button>
             </div>
         </form>
     </div>
 </div>
 
-<br />
-<br />
 
 <div class="card" >
     <div class="card-body">
@@ -46,8 +42,10 @@
                 </td>        
                 <td>
                     <a href="{% url 'ABC_Media:update_display' display.serialno %}" class="btn btn-primary"> Update </a>
-                    <a href="{% url 'ABC_Media:delete_display' display.serialno %}" class="btn btn-danger"> Delete</a>
-
+                    <a style="display: none;" href="{% url 'ABC_Media:delete_display' display.serialno %}" class="btn btn-danger"> Delete</a>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDigitalDisplayModal" onclick="setDelLink(this)">
+                        Delete
+                      </button>
                 </td>
             </tr>
             {% endfor %}
@@ -57,44 +55,54 @@
 
 <br />
 
-List of Available Models can also viewed here:
-<a href="{% url 'ABC_Media:viewModels' %}" style="color:lawngreen; font-weight: bold">Models</a>
- <br />
-
-<!--Page Number Logic-->
-{% if displays.has_previous %}
-<a href="?page=1"> &laquo; First</a>
-<a href="?page={{ displays.previous_page_number }}"> Previous</a>
-{% endif %}
-
-Page {{ displays.number }} of {{ displays.paginator.num_pages}}
-
-{% if displays.has_next %}
-<a href="?page={{ displays.next_page_number }}"> Next</a>
-<a href="?page={{ displays.paginator.num_pages }}"> Last &raquo</a>
-{% endif %}
-
-<br />
-<br />
-
-
-
-<!-- BOOTSTRAP PAGINATION-->
-<!--<nav aria-label="Page navigation example">
-    <ul class="pagination">
-
+<div class="row">
+    <div class="col">
+        <!--Page Number Logic-->
         {% if displays.has_previous %}
-        <li class="page-item"><a class="page-link" href="?page=1"> &laquo; First</a></li>
-        <li class="page-item"><a class="page-link" href="?page={{ displays.previous_page_number }}"> Previous</a></li>
+        <a href="?page=1"> &laquo; First</a>
+        <a href="?page={{ displays.previous_page_number }}"> Previous</a>
         {% endif %}
 
-        <li class="page-item disabled"><a class="page-link" href="#"> Page {{ displays.number }} of {{ displays.paginator.num_pages}}</a></li>
+        Page {{ displays.number }} of {{ displays.paginator.num_pages}}
 
         {% if displays.has_next %}
-        <li class="page-item"><a class="page-link" href="?page={{ displays.next_page_number }}"> Next</a></li>
-        <li class="page-item"><a class="page-link" href="?page={{ displays.paginator.num_pages }}"> Last &raquo</a></li>
+        <a href="?page={{ displays.next_page_number }}"> Next</a>
+        <a href="?page={{ displays.paginator.num_pages }}"> Last &raquo</a>
         {% endif %}
+    </div>
+    <div class="col">
+        List of Available Models can also viewed here:
+        <a href="{% url 'ABC_Media:viewModels' %}" class="green-primary-txt">Models</a>
+    </div>
+</div>
 
-    </ul>
-</nav>-->
+<div class="modal" id="deleteDigitalDisplayModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete Digital Display</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Apre you sure you want to delete the digital display <span class="fw-bold" id="digitalDisplayToDelete"></span>? This cannot be undone.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger" onclick="submitDelete()">Confirm Delete</button>
+          </div>
+        </div>
+      </div>
+</div>
+
+<script>
+    var delLink;
+    function setDelLink(h){
+        delLink = h.parentNode.children[1]
+        document.getElementById("digitalDisplayToDelete").innerText = h.parentNode.parentNode.children[0].innerText;
+    }
+
+    function submitDelete(){
+        delLink.click()
+    }
+</script>
 {% endblock %}

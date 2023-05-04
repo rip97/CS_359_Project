@@ -2,51 +2,25 @@
 
 {% block content %}
 
-<a href="{% url 'ABC_Media:main' %}" style="color:white; font-weight: bold">Home</a>
-<br />
-<br />
-<!--<a href="{% url 'ABC_Media:add_display' %}" style="color:white"> < Back </a>
-<br />
-<br />-->
+<h2 class="page-title"> List of Available Models</h2>
 
+<div>
+    <a href="{% url 'ABC_Media:main' %}" class="btn btn-secondary">Home</a>
+    <a href="{% url 'ABC_Media:view_all_displays' %}" class="btn btn-secondary">Back</a>
+</div>
+<br/>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Model Number</th>
+            <th>Width</th>
+            <th>Height</th>
+            <th>Weight</th>
+            <th>Depth</th>
+            <th>Screen Size</th>
+        </tr>
 
-<center>
-    <h3> List of Available Models </h3>
-</center>
-<br />
-
-<head>
-    <style>
-        table, th, td {
-            border: 1px solid white;
-            padding: 10px;
-            text-align: center;
-        }
-    </style>
-</head>
-
-<table>
-    <tr>
-        <th>
-            Model Number
-        </th>
-        <th>
-            Width
-        </th>
-        <th>
-            Height
-        </th>
-        <th>
-            Weight
-        </th>
-        <th>
-            Depth
-        </th>
-        <th>
-            Screen Size
-        </th>
-    </tr>
-
+    </thead>
     {% for model in models %}
     <tr>
         <td>
@@ -71,6 +45,5 @@
     {% endfor %}
 </table>
 
-<br />
 
 {% endblock %}
