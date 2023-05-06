@@ -6,7 +6,7 @@ from .forms import SearchForm
 from django.db import connection
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
-from .models import Digitaldisplay, Model
+from .models import Digitaldisplay, Model, Specializes, Locates
 from .forms import DigitalDisplayForm, DigitalDisplayFormUpdate, ModelInfoForm, ModelCreateForm
 from django.contrib import messages
 import re
@@ -171,15 +171,23 @@ def delete_display(request, display_id):
     digital_display = Digitaldisplay.objects.get(pk=display_id) #Get Display with display_id
     modelNo = digital_display.modelno #Pull ModelNo from the Display Object
     models = Model.objects.get(pk=modelNo) #Pull associated model using Display Model No
+    specializesCount = Specializes.objects.filter(modelno=modelNo).count() #Count records in Specializes table by ModelNo
+    locates_records  = Locates.objects.filter(serialno=display_id) #Pull all records in the Locates table by SerialNo
+
+    #Due to FK constraints, delete from the Locates Table first
+    for records in locates_records:
+        records.delete() 
+
     digital_display.delete() #Delete Display
 
     #Add Logic to Check for other Displays Sharing the Same Model No. If none, delete from Model Table
     modelCount = Digitaldisplay.objects.filter(modelno=modelNo).count()
-    if (modelCount > 1): 
-        return redirect('/view_all_displays',request)
+    
+    if modelCount > 0 or specializesCount >= 1:        
+        return redirect('/view_all_displays', request)
     else:
         models.delete()
-        return redirect('/view_all_displays',request)
+        return redirect('/view_all_displays', request)
 
 
 def view_all_models(request):
