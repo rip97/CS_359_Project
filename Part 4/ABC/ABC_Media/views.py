@@ -89,7 +89,7 @@ def search_digi_disp(request):
         # digital_display = Digitaldisplay.objects.get(pk=searched)
         digital_display_search_results = []
         for display in Digitaldisplay.objects.all():
-            if searched in display.serialno:
+            if searched.upper() in display.schedulersystem.upper():
                 digital_display_search_results.append(display)
         # param = {'current_user': current_user, 'searched': searched,
         #          'digital_displays': digital_display_search_results}
@@ -177,15 +177,20 @@ def delete_display(request, display_id):
     #Due to FK constraints, delete from the Locates Table first
     for records in locates_records:
         records.delete() 
+    
 
     digital_display.delete() #Delete Display
 
     #Add Logic to Check for other Displays Sharing the Same Model No. If none, delete from Model Table
     modelCount = Digitaldisplay.objects.filter(modelno=modelNo).count()
     
-    if modelCount > 0 or specializesCount >= 1:        
+    # if modelCount > 0 or specializesCount >= 1:
+    if modelCount > 0:        
         return redirect('/view_all_displays', request)
     else:
+        #Due to FK constraints, delete from the Specializes Table first
+        for sp in Specializes.objects.filter(modelno=modelNo):
+            sp.delete() 
         models.delete()
         return redirect('/view_all_displays', request)
 
